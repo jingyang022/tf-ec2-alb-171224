@@ -3,3 +3,4 @@
 Prerequisites: VPC: shared-vpc, 1x EC2 and 1x ALB
 
 <p>Step 1: Create IP Set
+<p>Step 2: Create Web ACL
