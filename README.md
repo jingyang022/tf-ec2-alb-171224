@@ -6,6 +6,6 @@ Prerequisites:
 - 1x ALB
 
 <p>Step 1: Create IP Set
-<br>Step 2: Create Web ACL
-- Associate with ALB
-- added "allow-ip" rule
+<p>Step 2: Create Web ACL
+<br>- Associate with ALB
+<br>- added "allow-ip" rule
