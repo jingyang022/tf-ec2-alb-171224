@@ -9,3 +9,4 @@ Prerequisites:
 <p>Step 2: Create Web ACL
 <br>- Associate with ALB
 <br>- added "allow-ip" rule
+<br>- added "block-admin-path" rule

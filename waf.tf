@@ -3,7 +3,7 @@ resource "aws_wafv2_ip_set" "ip_set" {
   name               = "${local.name_prefix}-ipset"
   scope              = "REGIONAL"
   ip_address_version = "IPV4"
-  addresses          = ["218.212.43.33/32"]
+  addresses          = ["218.212.36.47/32"]
 }
 
 resource "aws_wafv2_web_acl" "my_web_acl" {
@@ -15,9 +15,38 @@ resource "aws_wafv2_web_acl" "my_web_acl" {
     allow {}
   }
 
+  rule{
+    name     = "block-admin-path"
+    priority = 1
+
+    action {
+      block {}
+    }
+
+    statement {
+      byte_match_statement {
+        positional_constraint = "CONTAINS"
+        search_string         = "admin"
+        field_to_match {
+          uri_path {}
+          }
+        text_transformation {
+          priority = 0
+          type     = "NONE"
+          }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = false
+      metric_name                = "block-admin-path"
+      sampled_requests_enabled   = false
+    }
+  }
+
   rule {
     name     = "allow-ip"
-    priority = 1
+    priority = 2
 
     action {
       allow {}
@@ -38,7 +67,7 @@ resource "aws_wafv2_web_acl" "my_web_acl" {
 
   visibility_config {
     cloudwatch_metrics_enabled = false
-    metric_name                = "friendly-metric-name"
+    metric_name                = "allow-ip"
     sampled_requests_enabled   = false
   }
 }
