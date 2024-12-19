@@ -10,3 +10,4 @@ Prerequisites:
 <br>- Associate with ALB
 <br>- added "allow-ip" rule
 <br>- added "block-admin-path" rule
+<br>- added "AWSManagedRulesAmazonIpReputationList" rule
